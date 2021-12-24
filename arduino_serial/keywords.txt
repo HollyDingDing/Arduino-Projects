@@ -1,0 +1,31 @@
+#######################################
+# Syntax Coloring Map Servo
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+MotorController	KEYWORD1	MotorController	
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+moveMotor	KEYWORD2
+moveForward	KEYWORD2
+moveBack	KEYWORD2
+rotate		KEYWORD2
+moveDiagonal	KEYWORD2
+moveParallel	KEYWORD2
+moveBias	KEYWORD2
+stopMotor	KEYWORD2
+stopAll		KEYWORD2
+motorSetter	KEYWORD2
+printMotorDefinition	KEYWORD2
+motor_direction_setter	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+MOTOR_FORWARD	LITERAL1
+MOTOR_BACK	LITERAL1
+#######################################
