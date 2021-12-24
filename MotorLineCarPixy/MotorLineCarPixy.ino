@@ -1,7 +1,11 @@
-  #include <Pixy2.h>
+#include <Pixy2.h>
 #include <SoftwareSerial.h> // 引用「軟體序列埠」程式庫
 
 #define CENTER_X 39
+#define R 11
+#define L_WEIGHT -3.0
+#define R_WEIGHT 3.0
+
 
 SoftwareSerial BT(3, 2); // 設定軟體序列埠(接收腳, 傳送腳)
 Pixy2 pixy;
@@ -23,11 +27,18 @@ unsigned long mTime = 0, mVec = 0;
 
 void moveRobot(int Hx, int Hy, int Tx, int Ty) {
   int myTurn = Hx - Tx;
+  int leftS, rightS;
   int maxSpeed;
   if (myTurn > 22) {
     maxSpeed = speedTurn;
     myTurn = map(myTurn, -40, 40, -80, 120);
-//    myTurn = map(myTurn, -40, 40, -maxSpeed - 50, maxSpeed + 50);
+    if (myTurn > 0) {
+      leftS = maxSpeed + myTurn + (R * R_WEIGHT);
+      rightS = maxSpeed - myTurn;
+    } else {
+      leftS = maxSpeed + myTurn - (R * L_WEIGHT);
+      rightS = maxSpeed - myTurn;
+    }
   } else {
     maxSpeed = speedHigh;
     if (abs((Hx + Tx) / 2 - 39) > 10 && myTurn <= 10) {
@@ -37,11 +48,10 @@ void moveRobot(int Hx, int Hy, int Tx, int Ty) {
     } else if (abs((Hx + Tx) / 2 - 39) > 10 && Hx - Tx > 10) {
       myTurn = map(myTurn, -15, 15, -40, 40);
     }
-  }
-  
-  int leftS = maxSpeed + myTurn;
-  int rightS = maxSpeed - myTurn;
+    leftS = maxSpeed + myTurn;
+    rightS = maxSpeed - myTurn;
 
+  }
   
   if (leftS > 150) {
     leftS = 150;
